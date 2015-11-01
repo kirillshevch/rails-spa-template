@@ -66,5 +66,6 @@ append_file '.gitignore', <<-CODE
 /public/assets
 /public/uploads
 /vendor/assets/bower_components
+.ruby-gemset
 vendor/bundle/*
 CODE
