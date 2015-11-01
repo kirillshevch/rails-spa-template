@@ -78,3 +78,8 @@ CODE
 remove_file 'app/assets/javascripts/application.js'
 makefile 'app/assets/javascripts/application.js'
 makefile 'app/assets/javascripts/app.coffee'
+makefile 'app/assets/javascripts/core/core.coffee'
+makefile 'app/assets/javascripts/shared/shared.coffee'
+
+makefile 'Bowerfile'
+rake 'bower:install'

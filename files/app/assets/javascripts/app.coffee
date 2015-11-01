@@ -3,6 +3,15 @@
 //= require ./shared/shared
 
 angular.module "app", [
-  'app.core',
-  'app.shared'
+  "Devise"
+  "ngCookies"
+  "ngResource"
+  "ngRoute"
+  "ngSanitize"
+  "pascalprecht.translate"
+  "templates"
+  "ngFileUpload"
+  "underscore"
+  "app.core"
+  "app.shared"
 ]
