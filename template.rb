@@ -83,3 +83,5 @@ makefile 'app/assets/javascripts/shared/shared.coffee'
 
 makefile 'Bowerfile'
 rake 'bower:install'
+
+makefile 'app/assets/javascripts/templates/index.html.haml'
