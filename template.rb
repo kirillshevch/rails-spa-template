@@ -1,7 +1,12 @@
 remove_file "Gemfile"
-def source_paths
-  Array(super) + 
-    [File.expand_path(File.dirname(__FILE__))]
+def relative_path(path)
+  directory = File.dirname(__FILE__)
+  File.expand_path(path, "#{directory}/files")
+end
+
+def makefile(path)
+  read_path = relative_path(path)
+  file path, IO.read(read_path)
 end
 
 remove_file "Gemfile"
@@ -69,3 +74,7 @@ append_file '.gitignore', <<-CODE
 .ruby-gemset
 vendor/bundle/*
 CODE
+
+remove_file 'app/assets/javascripts/application.js'
+makefile 'app/assets/javascripts/application.js'
+makefile 'app/assets/javascripts/app.coffee'
