@@ -55,4 +55,16 @@ end
 gem_group :production do
   gem 'rails_12factor'
 end
-
+append_file '.gitignore', <<-CODE
+/.bundle
+/log/*
+!/log/.keep
+/tmp
+/shared/*
+/config/database.yml
+/config/secrets.yml
+/public/assets
+/public/uploads
+/vendor/assets/bower_components
+vendor/bundle/*
+CODE
