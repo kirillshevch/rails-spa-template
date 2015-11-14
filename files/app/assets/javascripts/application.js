@@ -9,7 +9,6 @@
 //= require angular-rails-templates
 //= require angular-cookies/angular-cookies
 //= require angular-resource/angular-resource
-//= require angular-translate/angular-translate
 //= require angular-sanitize
 //= require angular-strap/dist/modules/compiler
 //= require angular-strap/dist/modules/dimensions
@@ -18,3 +17,4 @@
 //= require angular-strap/dist/modules/popover
 //= require ng-file-upload/ng-file-upload-all
 //= require app
+//= require_tree ./templates

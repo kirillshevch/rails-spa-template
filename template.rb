@@ -9,11 +9,16 @@ def makefile(path)
   file path, IO.read(read_path)
 end
 
+def remove_and_make(filename)
+  remove_file filename
+  makefile filename
+end  
+
 remove_file "Gemfile"
 run "touch Gemfile"
 add_source 'https://rubygems.org'
 
-gem 'rails',                              '4.2.4'
+gem 'rails',                              '4.2.5'
 gem 'pg',                                 '~> 0.18.3'
 
 gem 'jquery-rails',                       '~> 4.0.5'
@@ -60,6 +65,9 @@ end
 gem_group :production do
   gem 'rails_12factor'
 end
+
+run 'bundle install'
+
 append_file '.gitignore', <<-CODE
 /.bundle
 /log/*
@@ -75,13 +83,59 @@ append_file '.gitignore', <<-CODE
 vendor/bundle/*
 CODE
 
-remove_file 'app/assets/javascripts/application.js'
-makefile 'app/assets/javascripts/application.js'
+remove_and_make 'app/assets/javascripts/application.js'
 makefile 'app/assets/javascripts/app.coffee'
 makefile 'app/assets/javascripts/core/core.coffee'
+makefile 'app/assets/javascripts/core/mainCtrl.coffee'
+makefile 'app/assets/javascripts/core/routes.coffee'
+makefile 'app/assets/javascripts/pages/indexPageCtrl.coffee'
+makefile 'app/assets/javascripts/pages/pages.coffee'
 makefile 'app/assets/javascripts/shared/shared.coffee'
-
-makefile 'Bowerfile'
-rake 'bower:install'
-
+makefile 'app/assets/javascripts/templates/pages/index.html.haml'
 makefile 'app/assets/javascripts/templates/index.html.haml'
+remove_file 'app/views/layouts/application.html.erb'
+makefile 'app/views/layouts/application.html.haml'
+
+remove_and_make 'app/controllers/application_controller.rb'
+makefile 'app/controllers/home_controller.rb'
+
+remove_and_make 'config/routes.rb'
+remove_file 'config/database.yml'
+makefile 'config/database.yml.example'
+
+name_of_db = ask 'Name of database(without prefixes _dev, _test, _production): '
+user_of_db = ask 'User for db: '
+pass_of_db = ask 'Password of db: '
+
+run 'touch config/database.yml'
+
+append_file 'config/database.yml', <<-CODE
+default: &default
+  adapter: postgresql
+  pool: 5
+  encoding: unicode
+  timeout: 5000
+  user: #{user_of_db}
+  password: #{pass_of_db}
+
+development:
+  <<: *default
+  database: #{name_of_db}_dev
+
+test:
+  <<: *default
+  database: #{name_of_db}_test
+
+production:
+  <<: *default
+  database: #{name_of_db}_production
+CODE
+
+run 'rake db:create'
+run 'rake db:migrate'
+
+remove_file 'README.rdoc'
+
+run 'rails g bower_rails:initialize'
+remove_and_make 'Bowerfile'
+rake 'bower:install'
