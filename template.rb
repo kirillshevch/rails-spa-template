@@ -135,6 +135,7 @@ run 'rake db:create'
 run 'rake db:migrate'
 
 remove_file 'README.rdoc'
+makefile 'README.md'
 
 run 'rails g bower_rails:initialize'
 remove_and_make 'Bowerfile'
