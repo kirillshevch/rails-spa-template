@@ -4,7 +4,7 @@ A rails template for creating a Single Page App using angularjs
 
 **Requirements**
 * [postgresql](http://www.postgresql.org/)
-* [node](http://nodejs.org) ([on github](https://github.com/joyent/node))
+* [node](http://nodejs.org) ([on github](https://github.com/nodejs/node))
 * [bower](https://github.com/bower/bower) installed with npm
 
 ## Usage
