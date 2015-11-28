@@ -12,7 +12,7 @@ end
 def remove_and_make(filename)
   remove_file filename
   makefile filename
-end  
+end
 
 remove_file "Gemfile"
 run "touch Gemfile"
@@ -26,10 +26,11 @@ gem 'sass-rails',                         '~> 5.0.0.beta1'
 gem 'uglifier',                           '>= 1.3.0'
 gem 'coffee-rails',                       '~> 4.1.0'
 gem 'bower-rails',                        '~> 0.10.0'
+gem 'i18n-js',                            '>= 3.0.0.rc11'
+gem 'bootstrap-sass',                     '~> 3.3.5.1'
+
 gem 'carrierwave',                        '~> 0.10.0'
 gem 'mini_magick',                        '~> 4.3.3'
-
-gem 'bootstrap-sass',                     '~> 3.3.5.1'
 
 gem 'haml-rails',                         '~> 0.9.0'
 
@@ -41,7 +42,6 @@ gem 'angular-rails-templates',            '~> 0.2.0'
 gem 'active_model_serializers',           '~> 0.9.3'
 
 gem 'puma',                               '~> 2.14.0'
-gem 'i18n-js',                            '>= 3.0.0.rc11'
 gem 'responders',                         '~> 2.1.0'
 
 gem_group :development, :test do
@@ -78,6 +78,7 @@ append_file '.gitignore', <<-CODE
 /config/secrets.yml
 /public/assets
 /public/uploads
+/public/javascripts/translations.js
 /vendor/assets/bower_components
 .ruby-gemset
 vendor/bundle/*
@@ -135,7 +136,6 @@ run 'rake db:create'
 run 'rake db:migrate'
 
 remove_file 'README.rdoc'
-makefile 'README.md'
 
 run 'rails g bower_rails:initialize'
 remove_and_make 'Bowerfile'
